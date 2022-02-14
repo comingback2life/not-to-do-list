@@ -6,8 +6,8 @@ const handleOnSubmit =e =>{ //handle on submit is being triggered everytime the 
   const frmData = new FormData(e);
   const task = frmData.get("task");
   const hours = +frmData.get("hr") //total hours being added.
-  if(hours<1){
-    return alert("How can time be less than 1 hour ??");
+  if(hours<0){
+    return alert("How can time be less than 0 ??");
   };
     const doNotDo = {
       task,
@@ -64,6 +64,48 @@ taskList.map((item,index)=>{
 });
 document.getElementById('task-list').innerHTML=str;
 }
+const displayNotToDoTask=()=>{
+    let str='';
+    badList.map((item,index)=>{
+      str+=`
+      <tr>
+      <td>
+        <input type="checkbox" name="" id="" />
+        ${item.task}
+      </td>`
+      if(item.hours===1){
+        str+=`<td> ${item.hours} hr</td>
+        <td class="text-end">
+        <button class="btn btn-sm btn-warning" onclick="doNotDoTask(${index})">
+            <i
+              class="fa-solid fa-arrow-left"
+              title="Mark as bad list"
+            ></i>
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="deleteItem(${index})">
+            <i class="fa-solid fa-trash" title="Delete"></i>
+          </button>
+          
+        </td>
+      </tr>`
+      }else{
+        str+=`<td> ${item.hours} hrs</td>
+        <td class="text-end">
+          <button class="btn btn-danger btn-sm" onclick="deleteItem(${index})">
+            <i class="fa-solid fa-trash" title="Delete"></i>
+          </button>
+          <button class="btn btn-sm btn-warning" onclick="doNotDoTask(${index})">
+            <i
+              class="fa-solid fa-arrow-left"
+              title="Mark as to-do list"
+            ></i>
+          </button>
+        </td>
+      </tr>`
+      };
+    });
+    document.getElementById('bad-list').innerHTML=str;
+    }
 
 const deleteItem=(index)=>{
   if(!confirm("Do you really want to delete this ?")){
@@ -90,6 +132,7 @@ const savedHours=()=>{
 
 const doNotDoTask = i =>{
   const itm= taskList.splice(i,1);
-  displayTask();
   badList.push(itm[0]);
+  displayNotToDoTask();
+  displayTask();
 }
