@@ -10,7 +10,3 @@ background: -webkit-linear-gradient(90deg, hsla(40, 94%, 74%, 1) 0%, hsla(60, 89
 
 filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#fbd07c", endColorstr="#f7f779", GradientType=1 );
 }
-
-.col22{
-  border:1px red solid;
-  }
