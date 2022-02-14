@@ -1,6 +1,6 @@
 const taskList=[]; 
 const badList = [];
-const totalNumberOfHours=15;
+const totalSavedHours = 15;
 
 const handleOnSubmit =e =>{ //handle on submit is being triggered everytime the click event is there.
   const frmData = new FormData(e);
@@ -65,9 +65,7 @@ const deleteItem=(index)=>{
 }
 
 const savedHours=()=>{
-  const total = taskList.reduce((subtotal,i)=>
-    subtotal+i.hours,0)
-  console.log(total);
+  const total = taskList.reduce((subtotal,i)=>subtotal+i.hours,0)
   if(total===0){
     document.getElementById('totalHours').innerText="";
   }else if(total===1){
