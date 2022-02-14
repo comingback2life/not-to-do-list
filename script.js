@@ -1,20 +1,24 @@
 const taskList=[]; 
 const badList = [];
-const totalSavedHours = 15;
+const totalWeeklyHours = 168; //24*7 hours.
 
 const handleOnSubmit =e =>{ //handle on submit is being triggered everytime the click event is there.
   const frmData = new FormData(e);
   const task = frmData.get("task");
   const hours = +frmData.get("hr") //total hours being added.
-
-  const doNotDo = {
-    task,
-    hours
+    const doNotDo = {
+      task,
+      hours
+    }
+    //const total = taskList.reduce((subtotal,i)=>subtotal+i.hours,0)+hours;
+    if((savedHours()+hours)>totalWeeklyHours){
+      alert("The total number of hours in a week is 168");
+    }else{
+      taskList.push(doNotDo); //pushing the tasklist to the array to store it.
+      displayTask();
+      savedHours();
+    }
   }
-taskList.push(doNotDo); //pushing the tasklist to the array to store it.
-displayTask();
-savedHours();
-}
 
 const displayTask=()=>{
 let str='';
@@ -59,6 +63,10 @@ document.getElementById('task-list').innerHTML=str;
 }
 
 const deleteItem=(index)=>{
+  if(!confirm("Do you really want to delete this ?")){
+   return;
+  }
+
   taskList.splice(index,1); // remove one item from the index position 
   displayTask();
   savedHours();
@@ -70,7 +78,9 @@ const savedHours=()=>{
     document.getElementById('totalHours').innerText="";
   }else if(total===1){
     document.getElementById('totalHours').innerText=(`Total time allocated this week ${total} hr`);
-  }else{
+  }
+  else{
     document.getElementById('totalHours').innerText=(`Total time allocated this week ${total} hrs`);
   }
+  return total;
 }
