@@ -6,11 +6,14 @@ const handleOnSubmit =e =>{ //handle on submit is being triggered everytime the 
   const frmData = new FormData(e);
   const task = frmData.get("task");
   const hours = +frmData.get("hr") //total hours being added.
+  if(hours<1){
+    return alert("How can time be less than 1 hour ??");
+  };
     const doNotDo = {
       task,
       hours
     }
-    //const total = taskList.reduce((subtotal,i)=>subtotal+i.hours,0)+hours;
+
     if((savedHours()+hours)>totalWeeklyHours){
       alert("The total number of hours in a week is 168");
     }else{
