@@ -38,7 +38,7 @@ taskList.map((item,index)=>{
       <button class="btn btn-danger btn-sm" onclick="deleteItem(${index})">
         <i class="fa-solid fa-trash" title="Delete"></i>
       </button>
-      <button class="btn btn-sm btn-warning">
+      <button class="btn btn-sm btn-warning" onclick="doNotDoTask(${index})">
         <i
           class="fa-solid fa-arrow-right"
           title="Mark as bad list"
@@ -52,7 +52,7 @@ taskList.map((item,index)=>{
       <button class="btn btn-danger btn-sm" onclick="deleteItem(${index})">
         <i class="fa-solid fa-trash" title="Delete"></i>
       </button>
-      <button class="btn btn-sm btn-warning">
+      <button class="btn btn-sm btn-warning" onclick="doNotDoTask(${index})">
         <i
           class="fa-solid fa-arrow-right"
           title="Mark as bad list"
@@ -86,4 +86,10 @@ const savedHours=()=>{
     document.getElementById('totalHours').innerText=(`Total time allocated this week ${total} hrs`);
   }
   return total;
+}
+
+const doNotDoTask = i =>{
+  const itm= taskList.splice(i,1);
+  displayTask();
+  badList.push(itm[0]);
 }
