@@ -1,5 +1,5 @@
 .wrapper{
-  height:100vh;
+  min-height:100vh;
   background: hsla(40, 94%, 74%, 1);
 
 background: linear-gradient(90deg, hsla(40, 94%, 74%, 1) 0%, hsla(60, 89%, 72%, 1) 100%);
